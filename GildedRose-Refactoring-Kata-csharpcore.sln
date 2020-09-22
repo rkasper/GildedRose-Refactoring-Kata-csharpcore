@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30517.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GildedRose-Refactoring-Kata-csharpcore", "GildedRose-Refactoring-Kata-csharpcore.csproj", "{A63D746E-875D-43EF-BC93-671ECE4265A2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A63D746E-875D-43EF-BC93-671ECE4265A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A63D746E-875D-43EF-BC93-671ECE4265A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A63D746E-875D-43EF-BC93-671ECE4265A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A63D746E-875D-43EF-BC93-671ECE4265A2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {006C8DD3-AE25-4D98-8235-E8396B01873B}
+	EndGlobalSection
+EndGlobal
