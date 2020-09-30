@@ -12,92 +12,99 @@ namespace GildedRose_Refactoring_Kata_csharpcore
         private const int ConcertDateIsClose = 11;
         private const int ConcertDateIsReallyClose = 6;
 
-        IList<Item> Items;
+        readonly IList<Item> _items;
 
         public GildedRose(IList<Item> items)
         {
-            this.Items = items;
+            this._items = items;
         }
 
         public void UpdateQuality()
         {
-            foreach (var item in Items)
+            foreach (var item in _items)
             {
-                switch (item.Name)
+                HandleIfAgedBrie(item); 
+                HandleIfBackstagePasses(item);
+                HandleIfSulfuras(item);
+                HandleIfNormalItem(item);
+            }
+        }
+
+        private static void HandleIfNormalItem(Item item)
+        {
+            if (IsNormalItem(item))
+            {
+
+                if (item.SellIn <= 0)
                 {
-                    case AgedBrie:
-                        HandleAgedBrie(item);
-                        break;
-                    case BackstagePasses:
-                        HandleBackstagePasses(item);
-                        break;
-                    case Sulfuras:
-                        HandleSulfuras();
-                        break;
-                    default:
-                        HandleNormalItem(item);
-                        break;
+                    item.Quality -= 2;
                 }
+                else
+                {
+                    item.Quality--;
+                }
+
+                item.SellIn--;
             }
         }
 
-        private static void HandleNormalItem(Item item)
+        private static bool IsNormalItem(Item item)
         {
-            if (item.SellIn <= 0)
-            {
-                item.Quality -= 2;
-            }
-            else
-            {
-                item.Quality--;
-            }
-
-            item.SellIn--;
+            return AgedBrie != item.Name && BackstagePasses != item.Name && Sulfuras != item.Name;
         }
 
-        private static void HandleSulfuras()
+        private static void HandleIfSulfuras(Item item)
         {
-            // Do nothing
+            if (Sulfuras == item.Name)
+            {
+                // Do nothing
+            }
         }
 
-        private static void HandleBackstagePasses(Item item)
+        private static void HandleIfBackstagePasses(Item item)
         {
-            if (item.SellIn <= 0)
+            if (BackstagePasses == item.Name)
             {
-                item.Quality = MinQuality;
-            }
-            else if (item.SellIn < ConcertDateIsReallyClose)
-            {
-                item.Quality += 3;
-            }
-            else if (item.SellIn < ConcertDateIsClose)
-            {
-                item.Quality += 2;
-            }
-            else
-            {
-                item.Quality++;
-            }
+                if (item.SellIn <= 0)
+                {
+                    item.Quality = MinQuality;
+                }
+                else if (item.SellIn < ConcertDateIsReallyClose)
+                {
+                    item.Quality += 3;
+                }
+                else if (item.SellIn < ConcertDateIsClose)
+                {
+                    item.Quality += 2;
+                }
+                else
+                {
+                    item.Quality++;
+                }
 
-            EnsureMaxQuality(item);
+                EnsureMaxQuality(item);
 
-            item.SellIn--;
+                item.SellIn--;
+            }
         }
 
-        private static void HandleAgedBrie(Item item)
+        private static void HandleIfAgedBrie(Item item)
         {
-            if (item.SellIn < 0)
+            if (AgedBrie == item.Name)
             {
-                item.Quality += 2;
-            }
-            else
-            {
-                item.Quality++;
-            }
+                if (item.SellIn < 0)
+                {
+                    item.Quality += 2;
+                }
+                else
+                {
+                    item.Quality++;
+                }
 
-            EnsureMaxQuality(item);
+                EnsureMaxQuality(item);
 
-            item.SellIn--;
+                item.SellIn--;
+            }
         }
 
         private static void EnsureMaxQuality(Item item)
